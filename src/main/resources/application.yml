@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: foodiesApi
+
+  #db configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/foodies
+    username: admin_user
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+#aws configuration bisogna creare laccount su aws console per avere i dati
+aws:
+  access:
+    key: ${AWS_ACCESS_KEY}
+  secret:
+    key: ${AWS_SECRET_KEY}
+  region: ap-south-1
+  s3:
+    bucketname: si fa sul sito di s3
+
+jwt:
+  secret:
+    key: ${JWT_SECRET_KEY}
