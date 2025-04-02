@@ -1,13 +1,15 @@
 package com.foodiesapi.service;
 
-import com.foodiesapi.io.CardRequest;
-import com.foodiesapi.io.CardResponse;
+import com.foodiesapi.io.CartRequest;
+import com.foodiesapi.io.CartResponse;
 
 public interface CartService {
 
-    CardResponse addToCart(CardRequest request);
+    CartResponse addToCart(CartRequest request);
 
-    CardResponse getCart();
+    CartResponse getCart();
 
     void clearCart();
+
+
 }

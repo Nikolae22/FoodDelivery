@@ -24,3 +24,8 @@ aws:
 jwt:
   secret:
     key: ${JWT_SECRET_KEY}
+
+#razorpay   indian api per i pagament in europa forse meglio stripe configuration
+razorpay:
+  key: ${RAZORPAY_KEY}
+  secret: ${RAZORPAY_SECRET}

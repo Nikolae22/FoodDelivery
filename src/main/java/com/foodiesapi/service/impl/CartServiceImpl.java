@@ -2,14 +2,15 @@ package com.foodiesapi.service.impl;
 
 import com.foodiesapi.entity.CartEntity;
 import com.foodiesapi.entity.ItemEntity;
-import com.foodiesapi.io.CardRequest;
-import com.foodiesapi.io.CardResponse;
+import com.foodiesapi.io.CartRequest;
+import com.foodiesapi.io.CartResponse;
 import com.foodiesapi.repository.CartRepository;
 import com.foodiesapi.service.CartService;
 import com.foodiesapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class CartServiceImpl implements CartService {
 
     // Aggiungi un articolo al carrello
     @Override
-    public CardResponse addToCart(CardRequest request) {
+    public CartResponse addToCart(CartRequest request) {
         String loggedInUserId = userService.findByUserId();
         // Trova il carrello dell'utente
         Optional<CartEntity> cartOptional = cartRepository.findByUserId(loggedInUserId);
@@ -43,17 +44,23 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CardResponse getCart() {
-        return null;
+    public CartResponse getCart() {
+        String loggedInUserId = userService.findByUserId();
+        CartEntity entity = cartRepository.findByUserId(loggedInUserId)
+                .orElse(new CartEntity(null, loggedInUserId, new ArrayList<>()));
+        return convertToResponse(entity);
     }
 
     @Override
     public void clearCart() {
+        String loggedInUserId = userService.findByUserId();
+        cartRepository.deleteByUserId(loggedInUserId);
 
     }
 
-    private CardResponse convertToResponse(CartEntity cartEntity) {
-        return CardResponse.builder()
+
+    private CartResponse convertToResponse(CartEntity cartEntity) {
+        return CartResponse.builder()
                 .id(String.valueOf(cartEntity.getId()))
                 .userId(cartEntity.getUserId())
                 .items(cartEntity.getItems())

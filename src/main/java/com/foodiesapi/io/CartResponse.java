@@ -1,6 +1,5 @@
 package com.foodiesapi.io;
 
-import com.foodiesapi.entity.CartEntity;
 import com.foodiesapi.entity.ItemEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CardResponse {
+public class CartResponse {
 
     private String id;
     private String userId;
